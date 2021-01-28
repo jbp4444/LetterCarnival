@@ -1,0 +1,46 @@
+
+local targetlib = require( 'shooting.targetlib' )
+
+function init(self)
+	-- Add initialization code here
+	-- each alien has its own background
+	local rn = math.random()
+	local img
+	local bg_img
+	if( rn < 0.20 ) then
+		img = 'shipBeige_manned'
+		bg_img = 'shipBeige_manned_back'
+	elseif( rn < 0.40 ) then
+		img = 'shipBlue_manned'
+		bg_img = 'shipBlue_manned_back'
+	elseif( rn < 0.60 ) then
+		img = 'shipGreen_manned'
+		bg_img = 'shipGreen_manned_back'
+	elseif( rn < 0.80 ) then
+		img = 'shipPink_manned'
+		bg_img = 'shipPink_manned_back'
+	else
+		img = 'shipYellow_manned'
+		bg_img = 'shipYellow_manned_back'
+	end
+
+	self.t_obj = targetlib.new({
+		position = {1100,500,0.3},
+		scale = {0.75,0.75,1},
+		speed = -200,
+		fg_images = {img},
+		bg_image = bg_img,
+	})
+
+	print( 'target:'..self.t_obj.image )
+end
+
+function update(self, dt)
+	-- Add update code here
+	return self.t_obj:update( dt )
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	return self.t_obj:on_input( action_id, action )
+end

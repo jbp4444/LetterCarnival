@@ -1,0 +1,68 @@
+
+local myrandom = require( 'lib.RandomLetter' )
+
+
+-- can use socket.gettime() too:
+math.randomseed( os.time() )
+
+function init(self)
+	-- Add initialization code here
+	print( 'letter_display.script - init' )
+
+	self.timer = 0
+	self.last_key = ''
+	self.is_spinning = false
+
+	msg.post( '.', 'acquire_input_focus' )
+
+	self.letters = { myrandom.randomLetter(), myrandom.randomLetter() }
+	self.active_letter = 1
+	label.set_text( '#letter1', self.letters[1] )
+	label.set_text( '#letter2', self.letters[2] )
+	print( self.active_letter, self.letters[1], self.letters[2] )
+
+	msg.post( '/basehud/hud/hud#hud', 'ready_go' )
+end
+
+function after_spin( self )
+	if( self.active_letter == 1 ) then
+		self.letters[2] = myrandom.randomLetter()
+		label.set_text( '#letter2', self.letters[2] )
+	else
+		self.letters[1] = myrandom.randomLetter()
+		label.set_text( '#letter1', self.letters[1] )
+	end
+	print( self.active_letter, self.letters[1], self.letters[2] )
+	self.is_spinning = false
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	local rtn = false
+	if( action_id == hash('keypress') ) then
+		if( self.is_spinning == false ) then
+			local txt = string.upper(action.text)
+			local act_txt = self.letters[ self.active_letter ]
+			if( txt == act_txt ) then
+				print( 'trigger animation' )
+				local rot = go.get( '.', 'euler' )
+				rot.z = rot.z + 180
+				self.is_spinning = true
+				go.animate( '.', 'euler.z', go.PLAYBACK_ONCE_FORWARD, rot.z, go.EASING_LINEAR, 0.33, 0, after_spin )
+				-- go.set( '.', 'euler', rot )
+				-- particlefx.play( '#fireworks' )
+				msg.post( '/player#player', 'move_forward' )
+
+				factory.create( '/sparkleFactory#factory', nil, nil, {}, nil )
+
+				if( self.active_letter == 1 ) then
+					self.active_letter = 2
+				else
+					self.active_letter = 1
+				end
+			end
+		end
+	end
+	return rtn
+end
+

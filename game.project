@@ -1,0 +1,18 @@
+[bootstrap]
+main_collection = /loader/loader.collectionc
+
+[script]
+shared_state = 1
+
+[display]
+width = 1024
+height = 640
+
+[android]
+input_method = HiddenInputField
+
+[project]
+title = TypingTutor
+version = 20210127.1
+publisher = Blue-Turtle.Net
+

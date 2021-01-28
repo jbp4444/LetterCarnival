@@ -1,0 +1,50 @@
+
+function init(self)
+	-- Add initialization code here
+	-- Remove this function if not needed
+	local pos = vmath.vector3( 1111, 300, 0.5 )
+	go.set_position( pos )
+	go.set_scale( 1.5,1,1 )
+	self.speed = -150
+
+	local rn = math.random()
+	local img
+	if( rn < 0.50 ) then
+		img = 'tree_oak'
+	else
+		img = 'tree_pine'
+	end
+	msg.post( '#tree', 'play_animation', {id=hash(img)} )
+	print( 'tree:'..img..':'..tostring(pos) )
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	local pos = go.get_position()
+	--print( 'pos '..tostring(pos) )
+	pos.x = pos.x + dt*self.speed
+	go.set_position( pos )
+	if( pos.x < -111 ) then
+		go.delete()
+	end
+end
+
+--function on_message(self, message_id, message, sender)
+-- Add message-handling code here
+-- Remove this function if not needed
+--end
+
+--function on_input(self, action_id, action)
+-- Add input-handling code here
+-- Remove this function if not needed
+--end
+
+--function on_reload(self)
+-- Add reload-handling code here
+-- Remove this function if not needed
+--end

@@ -1,0 +1,65 @@
+
+-- msg.post("main:/loader#script", "load_level", { level_id = 2 })
+
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+
+	msg.post( "go#mainmenu", "load" )
+	msg.post( "go#mainmenu", "enable" )
+	self.current = 'mainmenu'
+
+	print( 'loader - init' )
+end
+
+function on_message(self, message_id, message, sender)
+	-- print( 'loader-on_message' )
+	-- pprint( message_id )
+	-- pprint( message )
+
+	print( 'loader - msg -', message_id )
+
+	-- gotta ignore the return-messages when things are done loading/unloading
+	if( message_id == hash('proxy_loaded') ) then
+		return true
+	end
+	if( message_id == hash('proxy_unloaded') ) then
+		return true
+	end
+	
+	-- unload old screen
+	if( self.current == 'mainmenu' ) then
+		msg.post( "go#mainmenu", "unload" )
+	elseif( self.current == 'shooting' ) then
+		msg.post( "go#shooting", "unload" )
+	elseif( self.current == 'racing' ) then
+		msg.post( "go#racing", "unload" )
+	elseif( self.current == 'whack' ) then
+		msg.post( "go#whack", "unload" )
+	elseif( self.current == 'test' ) then
+		msg.post( "go#test", "unload" )
+	end
+
+	if message_id == hash("start_shooting") then
+		msg.post("go#shooting", "load", message )
+		msg.post("go#shooting", "enable")
+		self.current = 'shooting'
+	elseif message_id == hash("start_racing") then
+		msg.post("go#racing", "load", message )
+		msg.post("go#racing", "enable")
+		self.current = 'racing'
+	elseif message_id == hash("start_whack") then
+		msg.post("go#whack", "load", message )
+		msg.post("go#whack", "enable")
+		self.current = 'whack'
+	elseif message_id == hash("start_mainmenu") then
+		msg.post("go#mainmenu", "load" )
+		msg.post("go#mainmenu", "enable")
+		self.current = 'mainmenu'
+	elseif message_id == hash("start_test") then
+		msg.post("go#betatest", "load" )
+		msg.post("go#betatest", "enable")
+		self.current = 'test'
+	end
+
+end

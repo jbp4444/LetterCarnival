@@ -1,0 +1,37 @@
+
+go.property( 'layer', 1 )
+
+local targetlib = require( 'shooting.targetlib' )
+
+function init(self)
+	-- Add initialization code here
+
+	local pos
+	local scl
+	if( self.layer == 1 ) then
+		-- front target
+		pos = {-50,200,0.3}
+		scl = {1,1,1}
+	else
+		-- back target
+		pos = {-50,300,0.1}
+		scl = {0.70,0.70,1}
+	end
+	
+	self.t_obj = targetlib.new({
+		position = pos,
+		scale = scl,
+		fg_images = {'target_white','target_red1','target_red2','target_red3','target_colored'},
+		bg_image = 'target_back',
+	})
+
+	print( 'target:'..self.t_obj.image )
+end
+
+function update(self, dt)
+	return self.t_obj:update( dt )
+end
+
+function on_input(self, action_id, action)
+	return self.t_obj:on_input( action_id, action )
+end

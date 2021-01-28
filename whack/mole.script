@@ -1,0 +1,54 @@
+
+-- this script controls the mole gfx-obj's
+-- and mostly just receives messages which trigger animations
+
+go.property( 'animal_hash', hash('giraffe') )
+
+function init(self)
+	-- what animal are we?
+	msg.post( '#sprite', 'play_animation', {id=self.animal_hash} )
+	
+	self.position_up = go.get_position()
+	self.position_down = vmath.vector3( self.position_up.x, self.position_up.y-150, self.position_up.z )
+
+	self.timer_h = nil
+end
+
+function finish_go_down( self )
+	print( 'done with go-down animation' )
+	msg.post( '/gamelogic', 'mole_down' )
+end
+function finish_go_up( self )
+	print( 'done with go-up animation' )
+	msg.post( '/gamelogic', 'mole_up' )
+end
+
+function finish_timer_expired( self )
+	print( 'done with timer-expired animation' )
+	msg.post( '/gamelogic', 'mole_down' )
+end
+function timer_expired( self )
+	print( 'timer expired' )
+	msg.post( '/hud/score', 'missed', {pos=self.position_up, sender_id=go.get_id()} )
+	go.animate( '.', 'position', go.PLAYBACK_ONCE_FORWARD, self.position_down, go.EASING_LINEAR, 0.50, 0, finish_timer_expired )
+end
+
+function on_message( self, message_id, message, sender )
+	-- Add message-handling code here
+	if( message_id == hash('go_down') ) then
+		print( 'starting go-down animation' )
+		go.animate( '.', 'position', go.PLAYBACK_ONCE_FORWARD, self.position_down, go.EASING_LINEAR, 0.25, 0, finish_go_down )
+		if( self.timer_h ~= nil ) then
+			timer.cancel( self.timer_h )
+		end
+	elseif( message_id == hash('go_up') ) then
+		print( 'starting go-up animation' )
+		go.animate( '.', 'position', go.PLAYBACK_ONCE_FORWARD, self.position_up, go.EASING_LINEAR, 0.25, 0, finish_go_up )
+		-- TODO: check for message.duration
+		self.timer_h = timer.delay( message.duration, false, timer_expired )
+	elseif( message_id == hash('set_letter') ) then
+		local ltr = message.letter
+		label.set_text( '#label', ltr )
+	end
+end
+

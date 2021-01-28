@@ -1,0 +1,59 @@
+go.property( "paramset", 0 )
+
+function init(self)
+	-- Add initialization code here
+	-- Remove this function if not needed
+	-- self.center = vmath.vector3(360, 360, 0)
+	if( self.paramset == 0 ) then
+		print( "grass-paramset is 0" )
+		print( go.get_position() )
+		self.center = go.get_position()
+		self.radius = 20
+		self.speed = 2.3
+	elseif( self.paramset == 1 ) then
+		print( "grass-paramset is 1" )
+		print( go.get_position() )
+		self.center = go.get_position()
+		self.radius = 20
+		self.speed = 2
+	elseif( self.paramset == 2 ) then
+		print( "grass-paramset is 2" )
+		print( go.get_position() )
+		self.center = go.get_position()
+		self.radius = 0
+		self.speed = 0
+	end
+	self.t = 0
+end
+
+--function final(self)
+	-- Add finalization code here
+	-- Remove this function if not needed
+--end
+
+function update( self, dt )
+	-- Add update code here
+	-- Remove this function if not needed
+	self.t = self.t + dt
+	local dx = math.sin(self.t * self.speed) * self.radius
+	local pos = vmath.vector3()
+	pos.x = self.center.x + dx
+	pos.y = self.center.y
+	pos.z = self.center.z
+	go.set_position( pos )
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Remove this function if not needed
+end
+
+--function on_input(self, action_id, action)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+--end
+
+--function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+--end

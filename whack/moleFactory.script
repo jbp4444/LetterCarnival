@@ -1,0 +1,35 @@
+
+local animals = {
+	'giraffe', 'elephant', 'hippo', 'panda', 'pig', 'rabbit', 'parrot'
+}
+
+local loc_list = {
+	vmath.vector3(341,245,0.5),
+	vmath.vector3(682,245,0.5),
+	vmath.vector3(200,365,0.3),
+	vmath.vector3(512,365,0.3),
+	vmath.vector3(824,365,0.3),
+	vmath.vector3(341,480,0.1),
+	vmath.vector3(682,480,0.1),
+}
+
+local scale_factor = vmath.vector3( 0.45,0.45, 1 )
+
+-- global var
+mole_objs = {}
+
+function init(self)
+	print( 'moleFactory init' )
+	
+	for i=1,#loc_list do
+		local anml = animals[i]
+		local obj = factory.create( '/moleFactory#factory', loc_list[i], nil, {animal_hash=hash(anml)}, scale_factor )
+		table.insert( mole_objs, obj )
+	end
+
+	for i=1,#loc_list do
+		print( i, mole_objs[i], animals[i] )
+		msg.post( mole_objs[i], 'go_down' )
+	end
+
+end

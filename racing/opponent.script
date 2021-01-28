@@ -1,0 +1,42 @@
+function init( self )
+	-- Add initialization code here
+	-- movement params
+	self.full_speed = 75
+	self.speed = 0
+	self.omega = 4
+	self.radius = 20
+	self.t = 0
+	-- is this target-letter in transition?
+	self.anim = false
+	-- get copy of current position to see what the y/z vals are
+	local pos = go.get_position()
+	self.pos0 = pos
+	pos.x = 0
+	go.set_position( pos )
+end
+
+function update( self, dt )
+	-- Add update code here
+	self.t = self.t + dt
+	local dy = math.cos(self.t * self.omega) * self.radius
+
+	local pos = go.get_position()
+	pos.x = pos.x + dt*self.speed
+	pos.y = self.pos0.y + dy
+	go.set_position( pos )
+
+	if( pos.x > 1024 ) then
+		-- msg.post ... game over/player loses
+		print( 'game over - player loses' )
+		msg.post( '/basehud/hud/hud#hud', 'player_loses' )
+		go.delete()
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	if( message_id == hash('game_start') ) then
+		print( 'game-start .. opponent is moving' )
+		self.speed = self.full_speed
+	end
+end
