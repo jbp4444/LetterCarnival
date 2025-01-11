@@ -13,10 +13,6 @@ function init(self)
 end
 
 function on_message(self, message_id, message, sender)
-	-- print( 'loader-on_message' )
-	-- pprint( message_id )
-	-- pprint( message )
-
 	print( 'loader - msg -', message_id )
 
 	-- gotta ignore the return-messages when things are done loading/unloading
@@ -41,9 +37,12 @@ function on_message(self, message_id, message, sender)
 	end
 
 	if message_id == hash("start_shooting") then
-		msg.post("go#shooting", "load", message )
-		msg.post("go#shooting", "enable")
-		self.current = 'shooting'
+		sound.play( '#startSound', {}, function()
+			msg.post("go#shooting", "load", message )
+			msg.post("go#shooting", "enable")
+			self.current = 'shooting'
+			end
+		)
 	elseif message_id == hash("start_racing") then
 		msg.post("go#racing", "load", message )
 		msg.post("go#racing", "enable")

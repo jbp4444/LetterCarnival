@@ -1,4 +1,6 @@
 
+go.property( 'speed', -200 )
+
 local targetlib = require( 'shooting.targetlib' )
 
 function init(self)
@@ -27,7 +29,7 @@ function init(self)
 	self.t_obj = targetlib.new({
 		position = {1100,500,0.3},
 		scale = {0.75,0.75,1},
-		speed = -200,
+		speed = self.speed,
 		fg_images = {img},
 		bg_image = bg_img,
 	})

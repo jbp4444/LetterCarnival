@@ -5,33 +5,42 @@ embedded_instances {
   data: "components {\n"
   "  id: \"maingui\"\n"
   "  component: \"/mainmenu/maingui.gui\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"level1sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/kenney.nl/audio/powerUp4.ogg\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"level2sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/kenney.nl/audio/powerUp5.ogg\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"level3sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/kenney.nl/audio/powerUp6.ogg\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"level4sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/kenney.nl/audio/powerUp7.ogg\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"level5sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/kenney.nl/audio/powerUp8.ogg\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"level6sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/kenney.nl/audio/powerUp9.ogg\\\"\\n"
+  "\"\n"
   "}\n"
   ""
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
 }

@@ -3,7 +3,6 @@
 function init(self)
 	-- Add initialization code here
 	-- movement params
-	self.paused = true
 	self.speed = 100
 	self.omega = 4
 	self.radius = 20
@@ -27,7 +26,7 @@ function update( self, dt )
 	if( pos.x > 1024 ) then
 		-- msg.post ... game over/player loses
 		print( 'game over - player wins' )
-		msg.post( '/basehud/hud/hud#hud', 'player_wins' )
+		msg.post( '/gamelogic', 'player_wins' )
 		go.delete()
 	end
 end
@@ -35,13 +34,9 @@ end
 function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	if( message_id == hash('move_forward') ) then
-		if( self.paused == false ) then
-			local pos = go.get_position()
-			pos.x = pos.x + 100
-			-- go.animate( '.', 'position', go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_LINEAR, 0.5, 0, self.done_anim )
-			go.animate( '.', 'position.x', go.PLAYBACK_ONCE_FORWARD, pos.x, go.EASING_LINEAR, 0.5, 0 )
-		end
-	elseif( message_id == hash('game_start') ) then
-		self.paused = false
+		local pos = go.get_position()
+		pos.x = pos.x + 100
+		-- go.animate( '.', 'position', go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_LINEAR, 0.5, 0, self.done_anim )
+		go.animate( '.', 'position.x', go.PLAYBACK_ONCE_FORWARD, pos.x, go.EASING_LINEAR, 0.5, 0 )
 	end
 end

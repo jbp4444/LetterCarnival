@@ -1,0 +1,114 @@
+
+local frequency = 0.25
+
+function stack_append( stk, val, max_sz )
+	print('stack len '.. table.getn(stk) )
+	cur_sz = table.getn(stk)
+	if( cur_sz < max_sz ) then
+		table.insert( stk, val )
+	else
+		table.remove( stk, 1 )
+		table.insert( stk, val )
+	end
+end
+
+
+function init(self)
+	self.timer = 0
+	self.last_tgts = {}
+	self.speed = 150
+	self.active = false
+
+	msg.post( '/basehud/hud', 'register', { script='/gamelogic#gamelogic', type='single', bottom_color='red' } )
+	msg.post( '/basehud/hud', 'ready_go', {} )
+end
+
+-- function final(self)
+-- 	-- Add finalization code here
+-- 	-- Learn more: https://defold.com/manuals/script/
+-- 	-- Remove this function if not needed
+-- end
+
+function update(self, dt)
+	if( self.active ) then
+		self.timer = self.timer - dt
+		if( self.timer <= 0 ) then
+			self.timer = 1/frequency
+			local rn = math.random()
+			if( rn < 0.20 ) then
+				factory.create( '#factory_top' )
+			elseif( rn < 0.40 ) then
+				factory.create( '#factory_duck', nil, nil, { layer=1, speed=self.speed } )
+			elseif( rn < 0.60 ) then
+				factory.create( '#factory_target', nil, nil, { layer=1, speed=self.speed } )
+			elseif( rn < 0.80 ) then
+				factory.create( '#factory_duck', nil, nil, { layer=0, speed=self.speed } )
+			else
+				factory.create( '#factory_target', nil, nil, { layer=0, speed=self.speed } )
+			end
+		end
+	end
+
+end
+
+-- function fixed_update(self, dt)
+-- 	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
+-- 	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
+-- 	-- Physics section of game.project
+-- 	-- Add update code here
+-- 	-- Learn more: https://defold.com/manuals/script/
+-- 	-- Remove this function if not needed
+-- end
+
+function on_message(self, message_id, message, sender)
+	if( message_id == hash('score') ) then
+		-- pass 'score' msg on to hud
+		if( self.active ) then
+			msg.post( '/basehud/hud', message_id, message )
+		end
+
+	elseif( message_id == hash('game_start') ) then
+		self.active = true
+	elseif( message_id == hash('game_over') ) then
+		self.active = false
+	elseif( message_id == hash('back_button') ) then
+		self.active = false
+		msg.post( '/basehud/hud', 'game_exit' )
+	elseif( message_id == hash('final_exit') ) then
+		self.active = false
+		msg.post( 'loader:/go#loader', 'start_mainmenu' )
+	elseif( message_id == hash('complete') ) then
+		print('intercepted complete', self.active)
+		if( self.active ) then
+			if( message.hit ) then
+				stack_append( self.last_tgts, 'hit', 10 )
+			else
+				stack_append( self.last_tgts, 'miss', 10 )
+				-- pass 'miss' msg on to hud
+				msg.post( '/basehud/hud', 'missed', message )
+			end
+			-- TODO: use last-N hit/miss indicators to change speed of targets
+		end
+	else
+		print('unknown message - '..message_id )
+	end
+end
+
+-- function on_input(self, action_id, action)
+-- 	-- Add input-handling code here. The game object this script is attached to
+-- 	-- must have acquired input focus:
+-- 	--
+-- 	--    msg.post(".", "acquire_input_focus")
+-- 	--
+-- 	-- All mapped input bindings will be received. Mouse and touch input will
+-- 	-- be received regardless of where on the screen it happened.
+-- 	-- Learn more: https://defold.com/manuals/input/
+-- 	-- Remove this function if not needed
+-- end
+-- 
+-- function on_reload(self)
+-- 	-- Add reload-handling code here
+-- 	-- Learn more: https://defold.com/manuals/hot-reload/
+-- 	-- Remove this function if not needed
+-- end
+-- 

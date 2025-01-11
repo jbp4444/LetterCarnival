@@ -1,0 +1,98 @@
+
+local myrandom = require( 'lib.RandomLetter' )
+
+
+-- can use socket.gettime() too:
+math.randomseed( os.time() )
+
+function init(self)
+	-- Add initialization code here
+	self.timer = 0
+	self.last_key = ''
+	self.is_spinning = false
+
+	self.letters = { myrandom.randomLetter(), myrandom.randomLetter() }
+	self.active_letter = 1
+	label.set_text( '/letter#letter1', self.letters[1] )
+	label.set_text( '/letter#letter2', self.letters[2] )
+	print( self.active_letter, self.letters[1], self.letters[2] )
+
+	msg.post( '/basehud/hud', 'register', { script='/gamelogic#gamelogic', type='single' } )
+	msg.post( '/basehud/hud', 'ready_go', {} )
+	msg.post( '.', 'acquire_input_focus' )
+end
+
+function after_spin( self )
+	if( self.active_letter == 1 ) then
+		self.letters[2] = myrandom.randomLetter()
+		label.set_text( '/letter#letter2', self.letters[2] )
+	else
+		self.letters[1] = myrandom.randomLetter()
+		label.set_text( '/letter#letter1', self.letters[1] )
+	end
+	print( self.active_letter, self.letters[1], self.letters[2] )
+	self.is_spinning = false
+end
+
+-- function update(self, dt)
+-- 	if( self.active ) then
+-- 		self.timer = self.timer - dt
+-- 		if( self.timer <= 0 ) then
+-- 			self.timer = 2
+-- 			local rn = math.random() * 100
+-- 			msg.post( '/opponent#opponent', 'move_forward' )
+-- 		end
+-- 	end
+-- end
+
+function on_message(self, message_id, message, sender)
+	if( message_id == hash('player_wins') ) then
+		self.active = false
+		msg.post( '/basehud/hud', 'game_over' )
+	elseif( message_id == hash('game_start') ) then
+		self.active = true
+		msg.post( '/opponent#opponent', 'game_start' )
+	elseif( message_id == hash('game_over') ) then
+		self.active = false
+	elseif( message_id == hash('back_button') ) then
+		self.active = false
+		msg.post( '/basehud/hud', 'game_exit' )
+	elseif( message_id == hash('final_exit') ) then
+		self.active = false
+		msg.post( 'loader:/go#loader', 'start_mainmenu' )
+	else
+		print('unknown message - '..message_id )
+	end
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	local rtn = false
+	if( action_id == hash('keypress') ) then
+		if( self.is_spinning == false ) then
+			local txt = string.upper(action.text)
+			local act_txt = self.letters[ self.active_letter ]
+			if( txt == act_txt ) then
+				print( 'trigger animation' )
+				local rot = go.get( '/letter', 'euler' )
+				rot.z = rot.z + 180
+				self.is_spinning = true
+				go.animate( '/letter', 'euler.z', go.PLAYBACK_ONCE_FORWARD, rot.z, go.EASING_LINEAR, 0.33, 0, after_spin )
+				-- go.set( '.', 'euler', rot )
+				-- particlefx.play( '#fireworks' )
+				msg.post( '/player#player', 'move_forward' )
+				msg.post( '/basehud/hud', 'score', {score=5} )
+				
+				-- factory.create( '/sparkleFactory#factory', nil, nil, {}, nil )
+
+				if( self.active_letter == 1 ) then
+					self.active_letter = 2
+				else
+					self.active_letter = 1
+				end
+			end
+		end
+	end
+	return rtn
+end
+

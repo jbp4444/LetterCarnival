@@ -25,12 +25,11 @@ end
 
 function finish_timer_expired( self )
 	print( 'done with timer-expired animation' )
-	msg.post( '/gamelogic', 'mole_down' )
+	msg.post( '/gamelogic', 'mole_expired' )
 end
 function timer_expired( self )
 	print( 'timer expired' )
-	msg.post( '/hud/score', 'missed', {pos=self.position_up, sender_id=go.get_id()} )
-	go.animate( '.', 'position', go.PLAYBACK_ONCE_FORWARD, self.position_down, go.EASING_LINEAR, 0.50, 0, finish_timer_expired )
+	go.animate( '.', 'position', go.PLAYBACK_ONCE_FORWARD, self.position_down, go.EASING_LINEAR, 0.25, 0, finish_timer_expired )
 end
 
 function on_message( self, message_id, message, sender )

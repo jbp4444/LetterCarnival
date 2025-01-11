@@ -26,6 +26,7 @@ function targetlib.new( in_args )
 
 	-- state variables for this object
 	obj.flipped = false
+	obj.active = true
 
 	-- set up some gfx-obj params
 	local scl = vmath.vector3( obj.params.scale[1],obj.params.scale[2],obj.params.scale[3] )
@@ -85,24 +86,6 @@ function targetlib.new( in_args )
 	  --  --  --  --  --  --  --  --  --
 	--  --  --  --  --  --  --  --  --  --
 
-	function obj:done_xmark_anim()
-		print( 'done_xmark_anim' )
-		msg.post( '/hud/score', 'missed' )
-		go.delete()
-	end
-	function obj:start_xmark_anim()
-		msg.post( '#xmark',  'enable' )
-		msg.post( '#stick',  'disable' )
-		msg.post( '#back',   'disable' )
-		msg.post( '#front',  'disable' )
-		msg.post( '#circle', 'disable' )
-		msg.post( '#label',  'disable' )
-		local pos = go.get_position()
-		pos.x = 512
-		pos.y = 660
-		go.animate( go.get_id(), 'position', go.PLAYBACK_ONCE_FORWARD, pos, go.EASING_LINEAR, 1.0, 0, self.done_xmark_anim )
-	end
-
 	function obj:done_flip_anim()
 		print( 'done_flip_anim' )
 		go.delete()
@@ -115,8 +98,6 @@ function targetlib.new( in_args )
 		msg.post( '#label', 'disable' )
 		go.set( '.', 'scale.x', 0 )
 		go.animate( '.', 'scale.x', go.PLAYBACK_ONCE_FORWARD, -1.0*obj.params.scale[1], go.EASING_LINEAR, 0.1, 0, self.done_flip_anim )
-
-		msg.post( '/hud/score', 'score', {score=5,pos=go.get_position()} )
 	end
 
 	function obj:update( dt )
@@ -124,28 +105,25 @@ function targetlib.new( in_args )
 		pos.x = pos.x + dt*self.params.speed
 		go.set_position( pos )
 
-		if( (pos.x > 1111) or (pos.x < -111) ) then
-			-- TODO: send msg to HUD to update score (player missed this target)
-			if( self.flipped == false ) then
-				print( 'target missed' )
-				-- stop future calls
-				self.flipped = true
-				--self:start_xmark_anim()
-				local pos = go.get_position()
-				msg.post( '/hud/score', 'missed', {pos=pos, sender_id=go.get_id()} )
-			end
+		if( self.active and ((pos.x > 1111) or (pos.x < -111)) ) then
+			print( 'target complete' )
+			self.active = false
+			local pos = go.get_position()
+			msg.post( '/gamelogic', 'complete', {hit=self.flipped, pos=pos, sender_id=go.get_id()} )
 		end
 	end
 
 	function obj:on_input( action_id, action )
 		-- Add input-handling code here
 		local rtn = false
-		if( action_id ~= nil ) then
+		if( self.active and (action_id ~= nil) ) then
 			if( action.text ~= nil ) then
 				if( self.flipped == false ) then
 					local ltr = string.upper( action.text )
 					if( ltr == self.letter ) then
 						print( 'starting flip_anim' )
+						sound.play( '#sound' )
+						msg.post( '/gamelogic', 'score', {score=5,pos=go.get_position()} )
 						go.animate( '.', 'scale.x', go.PLAYBACK_ONCE_FORWARD, 0.0, go.EASING_LINEAR, 0.1, 0, self.mid_flip_anim )
 						self.flipped = true
 						rtn = true

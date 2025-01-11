@@ -1,5 +1,6 @@
 
 go.property( 'layer', 1 )
+go.property( 'speed', 150 )
 
 local targetlib = require( 'shooting.targetlib' )
 
@@ -19,6 +20,7 @@ function init(self)
 	self.t_obj = targetlib.new({
 		position = pos,
 		scale = scl,
+		speed = self.speed,
 		fg_images = {'duck_brown','duck_white','duck_yellow'},
 		bg_image = 'duck_back',
 	})

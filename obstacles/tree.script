@@ -29,7 +29,7 @@ function update(self, dt)
 	--print( 'pos '..tostring(pos) )
 	pos.x = pos.x + dt*self.speed
 	go.set_position( pos )
-	if( pos.x < -111 ) then
+	if( (pos.x > 1111) or (pos.x < -111) ) then
 		go.delete()
 	end
 end
