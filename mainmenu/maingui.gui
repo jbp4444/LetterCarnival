@@ -278,8 +278,8 @@ nodes {
     y: 75.0
   }
   scale {
-    x: 0.75
-    y: 0.75
+    x: 0.5
+    y: 0.5
   }
   type: TYPE_BOX
   texture: "stall_atlas/logo1"

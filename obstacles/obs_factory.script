@@ -23,9 +23,11 @@ function update(self, dt)
 		local rn = math.random()
 		if( rn < 0.90 ) then
 			factory.create( '#factory_tree' )
+			sound.play( '#sound' )
 			print( 'launching tree' )
 		else
 			factory.create( '#factory_cloud' )
+			sound.play( '#sound' )
 			print( 'launching cloud' )
 		end
 	end

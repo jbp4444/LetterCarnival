@@ -41,7 +41,7 @@ function on_input(self, action_id, action)
 			msg.post("loader:/go#loader", "start_whack" )
 			
 		elseif( gui.pick_node(bt_logo,action.x,action.y) ) then
-			sys.open_url( 'https://itch.io/', { target='_blank' } )
+			sys.open_url( 'https://blue-turtle.itch.io/', { target='_blank' } )
 
 		else
 			for i=1,6 do

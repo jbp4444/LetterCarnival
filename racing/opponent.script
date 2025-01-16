@@ -28,7 +28,7 @@ function update( self, dt )
 	if( pos.x > 1024 ) then
 		-- msg.post ... game over/player loses
 		print( 'game over - player loses' )
-		msg.post( '/basehud/hud/hud#hud', 'player_loses' )
+		msg.post( '/gamelogic', 'player_loses' )
 		go.delete()
 	end
 end
@@ -38,5 +38,8 @@ function on_message(self, message_id, message, sender)
 	if( message_id == hash('game_start') ) then
 		print( 'game-start .. opponent is moving' )
 		self.speed = self.full_speed
+	elseif( message_id == hash('set_speed') ) then
+		print( 'game-start .. opponent is moving' )
+		self.speed = message.speed
 	end
 end

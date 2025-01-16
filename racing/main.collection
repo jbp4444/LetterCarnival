@@ -31,21 +31,6 @@ collection_instances {
 }
 scale_along_z: 0
 embedded_instances {
-  id: "sparkleFactory"
-  data: "embedded_components {\n"
-  "  id: \"factory\"\n"
-  "  type: \"factory\"\n"
-  "  data: \"prototype: \\\"/racing/sparkleProto.go\\\"\\n"
-  "\"\n"
-  "}\n"
-  ""
-  position {
-    x: 512.0
-    y: 125.0
-    z: 0.4
-  }
-}
-embedded_instances {
   id: "gamelogic"
   data: "components {\n"
   "  id: \"gamelogic\"\n"

@@ -26,6 +26,10 @@ function init(self)
 		bg_img = 'shipYellow_manned_back'
 	end
 
+	if( self.speed > 0 ) then
+		self.speed = -1 * self.speed
+	end
+
 	self.t_obj = targetlib.new({
 		position = {1100,500,0.3},
 		scale = {0.75,0.75,1},

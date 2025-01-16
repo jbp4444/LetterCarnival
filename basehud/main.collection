@@ -456,8 +456,12 @@ embedded_instances {
   ""
   position {
     x: 800.0
-    y: 50.0
+    y: 65.0
     z: 0.85
+  }
+  scale3 {
+    x: 0.9
+    y: 0.9
   }
 }
 embedded_instances {
@@ -615,6 +619,12 @@ embedded_instances {
   "  position {\n"
   "    x: 150.0\n"
   "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/kenney.nl/audio/phaserUp5.ogg\\\"\\n"
+  "\"\n"
   "}\n"
   ""
   position {
@@ -1126,5 +1136,87 @@ embedded_instances {
   rotation {
     z: 0.70710677
     w: 0.70710677
+  }
+}
+embedded_instances {
+  id: "level"
+  data: "embedded_components {\n"
+  "  id: \"level5\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"icon_target\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/hud.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 200.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"level1\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"icon_target\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/hud.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"level2\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"icon_target\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/hud.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 50.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"level3\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"icon_target\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/hud.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 100.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"level4\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"default_animation: \\\"icon_target\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "textures {\\n"
+  "  sampler: \\\"texture_sampler\\\"\\n"
+  "  texture: \\\"/assets/hud.atlas\\\"\\n"
+  "}\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 150.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/kenney.nl/audio/powerUp2.ogg\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 100.0
+    y: 65.0
+    z: 0.95
   }
 }

@@ -4,6 +4,9 @@ local bz = require("bzAnim.bzLibrary")
 
 local digits = { 'score#digit1000', 'score#digit100', 'score#digit10', 'score#digit1' }
 local health_go = { '/basehud/health#health1', '/basehud/health#health2', '/basehud/health#health3', '/basehud/health#health4', '/basehud/health#health5' }
+local level_go = { '/basehud/level#level1', '/basehud/level#level2', '/basehud/level#level3', '/basehud/level#level4', '/basehud/level#level5' }
+local flags_go = { '/basehud/flag_go', '/basehud/flag_ready', '/basehud/flag_gameover', '/basehud/flag_exit', '/basehud/flag_playerloses', '/basehud/flag_playerwins' }
+
 
 function render_score( score )
 	local n = score
@@ -39,6 +42,30 @@ function render_hits( hits )
 	end
 end
 
+function render_level( level, show_splash )
+	print( 'hud - render_level' )
+	if( level > 5 ) then
+		level = 5
+	end
+	if( show_splash ) then
+		local pos = go.get_position( level_go[level] )
+		pos.x = pos.x + (level-1)*50
+		obj = factory.create( '/basehud/sparkleFactory#factory', pos )
+		particlefx.play( obj )
+		sound.play( '/basehud/level#sound' )
+		timer.delay(1.0, false, function()
+			go.delete(obj)
+			end)
+	end
+	for i=1,5 do
+		if( level >= i ) then
+			msg.post( level_go[i], 'enable' )
+		else
+			msg.post( level_go[i], 'disable' )
+		end
+	end
+end
+
 
 function start_anim4( self )
 	print( 'start-anim phase 4' )
@@ -58,20 +85,6 @@ function start_anim2( self )
 	go.animate( '/basehud/flag_ready', 'euler.z', go.PLAYBACK_ONCE_FORWARD, -90, go.EASING_LINEAR, 0.5, 0.33 )
 	go.animate( '/basehud/flag_go', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0.33, start_anim3 )
 end
-function start_anim1( self )
-	print( 'start-anim phase 1' )
-	go.animate( '/basehud/flag_ready', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, start_anim2 )
-end
-
-function gameover_anim( self )
-	print( 'gameover-anim phase 1' )
-	go.animate( '/basehud/flag_gameover', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5 )
-	-- msg.post( '/basehud/backbutton#sprite', 'enable' )
-end
-function gameexit_anim( self )
-	print( 'gameexit-anim phase 1' )
-	go.animate( '/basehud/flag_exit', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, gameexit_anim2 )
-end
 function gameexit_anim2( self )
 	print( 'gameexit-anim phase 2' )
 	if( self.game_script ~= nil ) then
@@ -81,21 +94,41 @@ function gameexit_anim2( self )
 		end)
 	end
 end
-
-function losing_anim( self )
-	print( 'losing-anim phase 1' )
-	go.animate( '/basehud/flag_playerloses', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5 )
-	-- msg.post( '/basehud/backbutton#sprite', 'enable' )
-end
 function winning_anim2( self )
 	print( 'winning-anim phase 2' )
 	particlefx.play( '/basehud/flag_playerwins#fireworks' )
 	-- msg.post( '/basehud/backbutton#sprite', 'enable' )
 end
-function winning_anim( self )
-	print( 'winning-anim phase 1' )
-	go.animate( '/basehud/flag_playerwins', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, winning_anim2 )
+
+function show_flag( self, flag )
+	-- rotate out any existing flags
+	for i=1,#flags_go do
+		rot_q = go.get_world_rotation( flags_go[i] )
+		print( i, rot_q )
+		if( rot_q.w >= 0.98 ) then
+			go.animate( flags_go[i], 'euler.z', go.PLAYBACK_ONCE_FORWARD, -180, go.EASING_LINEAR, 0.50 )
+		end
+	end
+	if( flag == 'ready_go' ) then
+		print( 'start-anim phase 1' )
+		go.animate( '/basehud/flag_ready', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, start_anim2 )
+	elseif( flag == 'game_over' ) then
+		print( 'gameover-anim phase 1' )
+		go.animate( '/basehud/flag_gameover', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5 )
+	elseif( flag == 'game_exit' ) then
+		print( 'gameexit-anim phase 1' )
+		go.animate( '/basehud/flag_exit', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, gameexit_anim2 )
+	elseif( flag == 'player_wins' ) then
+		print( 'winning-anim phase 1' )
+		go.animate( '/basehud/flag_playerwins', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, winning_anim2 )
+	elseif( flag == 'player_loses' ) then
+		print( 'losing-anim phase 1' )
+		go.animate( '/basehud/flag_playerloses', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5 )
+	else
+		print('unknown flag', flag )
+	end
 end
+
 
 function init(self)
 	-- Add initialization code here
@@ -103,28 +136,23 @@ function init(self)
 	self.have_winner = false
 
 	self.score = 0
-	self.hits  = 3
+	self.hits  = 0
+	self.level = 0
 	self.game_script = false
 
 	render_score( self.score )
 	render_hits( self.hits )
-	
-	-- msg.post( '/basehud/backbutton#sprite', 'disable' )
+	render_level( self.level, false )
+
 	msg.post( '.', 'acquire_input_focus' )
 end
 
 function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	if( message_id == hash('score') ) then
+		sound.play( 'score#sound' )
 		self.score = self.score + message.score
 		render_score( self.score )
-
-		-- TODO: only do this if the whack-a-m game is active
-		if( false ) then
-			local m_obj = mole_objs[message.mole_id]
-			local pos = go.get_position( m_obj )
-			local sprkl = factory.create("/sparkleFactory#factory", pos, nil, {}, nil )
-		end
 
 	elseif( message_id == hash('missed') ) then
 		local props = {
@@ -153,7 +181,15 @@ function on_message(self, message_id, message, sender)
 			},
 		})
 
+	elseif( message_id == hash('level_up') ) then
+		self.level = self.level + 1
+		render_level( self.level, true )
+	elseif( message_id == hash('set_level') ) then
+		self.level = message.level
+		render_level( self.level, false )
+
 	elseif( message_id == hash('anim_complete') ) then
+		-- TODO: if we animate anything else, we'll need to decipher it here
 		print('anim-complete for ', message)
 		sound.play( 'health#sound' )
 		render_hits( self.hits )
@@ -165,19 +201,26 @@ function on_message(self, message_id, message, sender)
 	elseif( message_id == hash('ready_go') ) then
 		if( self.have_winner == false ) then
 			print( 'hud - ready-set-go' )
-			start_anim1()
+			show_flag( self, 'ready_go' )
 		end
 	elseif( message_id == hash('game_over') ) then
+		-- this can be triggered by the HUD itself or by the gamelogic
 		print( 'hud - game over' )
 		if( self.game_script ~= nil ) then
 			print( 'sending game_over msg to ', self.game_script )
 			msg.post( self.game_script, 'game_over' )
 		end
 		self.have_winner = true
-		gameover_anim()
+		if( message.player_wins ) then
+			show_flag( self, 'player_wins' )
+		elseif( message.player_loses ) then
+			show_flag( self, 'player_loses' )
+		else
+			show_flag( self, 'game_over' )
+		end
 	elseif( message_id == hash('game_exit') ) then
 		print( 'hud - game exit' )
-		gameexit_anim()
+		show_flag( self, 'game_exit' )
 	elseif( message_id == hash('register') ) then
 		print( 'hud - register game script ', sender, message )
 		if( message.script ~= nil ) then
