@@ -29,6 +29,7 @@ function on_input(self, action_id, action)
 		local sel_shooting = gui.get_node("select_shooting")
 		local sel_racing   = gui.get_node("select_racing")
 		local sel_whack    = gui.get_node("select_whack")
+		local sel_darts    = gui.get_node("select_darts")
 		local bt_logo      = gui.get_node("bt_logo")
 		
 		if( gui.pick_node(textExit,action.x,action.y) ) then
@@ -39,7 +40,9 @@ function on_input(self, action_id, action)
 			msg.post("loader:/go#loader", "start_racing" )
 		elseif( gui.pick_node(sel_whack,action.x,action.y) ) then
 			msg.post("loader:/go#loader", "start_whack" )
-			
+		elseif( gui.pick_node(sel_darts,action.x,action.y) ) then
+			msg.post("loader:/go#loader", "start_darts" )
+
 		elseif( gui.pick_node(bt_logo,action.x,action.y) ) then
 			sys.open_url( 'https://blue-turtle.itch.io/', { target='_blank' } )
 

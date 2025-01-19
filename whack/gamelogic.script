@@ -88,6 +88,7 @@ function update(self, dt)
 				local uptime = lvl_uptime[self.level]
 				local rt = math.random(1,uptime)
 				msg.post( mole_objs[m_num], 'go_up', { duration=rt } )
+				sound.play( '#sound_up' )
 			end
 
 			self.timer = lvl_period[self.level]
@@ -116,6 +117,7 @@ function on_message( self, message_id, message, sender )
 		print('mole was missed')
 		self.mole_state[sender_num] = 'down'
 		msg.post( '/basehud/hud', 'missed', { pos=go.get_world_position(mole_objs[sender_num]) } )
+		sound.play( '#sound_down' )
 		self.last_tgts:pushRight( 'miss' )
 		check_level_up( self )
 		

@@ -1,0 +1,20 @@
+
+
+function on_message( self, message_id, message, sender )
+	-- Add message-handling code here
+	if( message_id == hash('pop') ) then
+		print( 'starting pop animation' )
+		msg.post( '.', 'disable' )
+	elseif( message_id == hash('inflate') ) then
+		print( 'starting inflate animation' )
+		msg.post( '.', 'enable' )
+		--go.animate( '.', 'position', go.PLAYBACK_ONCE_FORWARD, self.position_up, go.EASING_LINEAR, 0.25, 0 )
+	elseif( message_id == hash('init') ) then
+		self.letter = message.letter
+		self.color = message.color
+		label.set_text( '#label', self.letter )
+		msg.post( '#sprite', 'play_animation', {id=hash(self.color)} )
+		msg.post( '.', 'enable' )
+	end
+end
+

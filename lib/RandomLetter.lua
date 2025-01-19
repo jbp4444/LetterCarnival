@@ -23,7 +23,7 @@ local letters
 local letters_cache = {}
 local lfreq
 
-local function shuffle(list)
+function M.shuffle(list)
 	for i = 1,#list do
 		local j = math.random(#list)
 		list[i], list[j] = list[j], list[i]
@@ -84,7 +84,7 @@ function M.randomLetter()
 				table.insert( letters_cache, letters[j] )
 			end
 		end
-		shuffle( letters_cache )
+		M.shuffle( letters_cache )
 	end
 
 -- 	rn = math.random()

@@ -32,8 +32,8 @@ function on_message(self, message_id, message, sender)
 		msg.post( "go#racing", "unload" )
 	elseif( self.current == 'whack' ) then
 		msg.post( "go#whack", "unload" )
-	elseif( self.current == 'test' ) then
-		msg.post( "go#test", "unload" )
+	elseif( self.current == 'darts' ) then
+		msg.post( "go#darts", "unload" )
 	end
 
 	if message_id == hash("start_shooting") then
@@ -55,10 +55,10 @@ function on_message(self, message_id, message, sender)
 		msg.post("go#mainmenu", "load" )
 		msg.post("go#mainmenu", "enable")
 		self.current = 'mainmenu'
-	elseif message_id == hash("start_test") then
-		msg.post("go#betatest", "load" )
-		msg.post("go#betatest", "enable")
-		self.current = 'test'
+	elseif message_id == hash("start_darts") then
+		msg.post("go#darts", "load" )
+		msg.post("go#darts", "enable")
+		self.current = 'darts'
 	end
 
 end

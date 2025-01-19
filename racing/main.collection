@@ -36,6 +36,12 @@ embedded_instances {
   "  id: \"gamelogic\"\n"
   "  component: \"/racing/gamelogic.script\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"sound\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/kenney.nl/audio/impactMetal_light_000.ogg\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
 embedded_instances {

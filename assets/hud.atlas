@@ -88,4 +88,22 @@ images {
 images {
   image: "/assets/kenney.nl/HUD/icon_target.png"
 }
+images {
+  image: "/assets/finger1_sm.png"
+}
+images {
+  image: "/assets/finger12_sm.png"
+}
+images {
+  image: "/assets/finger123_sm.png"
+}
+images {
+  image: "/assets/finger1234_sm.png"
+}
+images {
+  image: "/assets/finger12345_sm.png"
+}
+images {
+  image: "/assets/finger12345X_sm.png"
+}
 extrude_borders: 2

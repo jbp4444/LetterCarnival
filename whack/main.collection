@@ -25,6 +25,18 @@ embedded_instances {
   "  id: \"gamelogic\"\n"
   "  component: \"/whack/gamelogic.script\"\n"
   "}\n"
+  "embedded_components {\n"
+  "  id: \"sound_up\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/kenney.nl/audio/phaserUp7.ogg\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"sound_down\"\n"
+  "  type: \"sound\"\n"
+  "  data: \"sound: \\\"/assets/kenney.nl/audio/powerUp9.ogg\\\"\\n"
+  "\"\n"
+  "}\n"
   ""
 }
 embedded_instances {

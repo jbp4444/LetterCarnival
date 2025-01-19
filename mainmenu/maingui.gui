@@ -97,8 +97,8 @@ nodes {
 }
 nodes {
   position {
-    x: 512.0
-    y: 61.0
+    x: 930.0
+    y: 64.0
   }
   scale {
     x: 2.0
@@ -274,8 +274,8 @@ nodes {
 }
 nodes {
   position {
-    x: 75.0
-    y: 75.0
+    x: 512.0
+    y: 64.0
   }
   scale {
     x: 0.5
@@ -394,6 +394,24 @@ nodes {
   id: "select_level6"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 256.0
+    y: 100.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "B-Pop"
+  font: "medfont"
+  id: "select_darts"
+  inherit_alpha: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

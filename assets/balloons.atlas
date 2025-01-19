@@ -1,0 +1,28 @@
+images {
+  image: "/assets/balloon_black.png"
+}
+images {
+  image: "/assets/balloon_blue.png"
+}
+images {
+  image: "/assets/balloon_green.png"
+}
+images {
+  image: "/assets/balloon_red.png"
+}
+images {
+  image: "/assets/circle64.png"
+}
+images {
+  image: "/assets/circle128.png"
+}
+images {
+  image: "/assets/circle256.png"
+}
+images {
+  image: "/assets/balloon_aqua.png"
+}
+images {
+  image: "/assets/balloon_purple.png"
+}
+extrude_borders: 2

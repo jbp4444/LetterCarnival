@@ -6,6 +6,7 @@ local digits = { 'score#digit1000', 'score#digit100', 'score#digit10', 'score#di
 local health_go = { '/basehud/health#health1', '/basehud/health#health2', '/basehud/health#health3', '/basehud/health#health4', '/basehud/health#health5' }
 local level_go = { '/basehud/level#level1', '/basehud/level#level2', '/basehud/level#level3', '/basehud/level#level4', '/basehud/level#level5' }
 local flags_go = { '/basehud/flag_go', '/basehud/flag_ready', '/basehud/flag_gameover', '/basehud/flag_exit', '/basehud/flag_playerloses', '/basehud/flag_playerwins' }
+local finger_imgs = { 'finger1_sm', 'finger12_sm', 'finger123_sm', 'finger1234_sm', 'finger12345_sm', 'finger12345X_sm' }
 
 
 function render_score( score )
@@ -49,13 +50,13 @@ function render_level( level, show_splash )
 	end
 	if( show_splash ) then
 		local pos = go.get_position( level_go[level] )
-		pos.x = pos.x + (level-1)*50
+		pos.x = pos.x + level*50
 		obj = factory.create( '/basehud/sparkleFactory#factory', pos )
 		particlefx.play( obj )
 		sound.play( '/basehud/level#sound' )
 		timer.delay(1.0, false, function()
 			go.delete(obj)
-			end)
+		end)
 	end
 	for i=1,5 do
 		if( level >= i ) then
@@ -64,6 +65,24 @@ function render_level( level, show_splash )
 			msg.post( level_go[i], 'disable' )
 		end
 	end
+end
+
+function render_fingerlevel( level, show_splash )
+	print( 'hud - render_fingerlevel' )
+	if( level > #finger_imgs ) then
+		level = #finger_imgs
+	end
+	if( false and show_splash ) then
+		local pos = go.get_position( level_go[level] )
+		pos.x = pos.x + (level-1)*50
+		obj = factory.create( '/basehud/sparkleFactory#factory', pos )
+		particlefx.play( obj )
+		sound.play( '/basehud/level#sound' )
+		timer.delay(1.0, false, function()
+			go.delete(obj)
+		end)
+	end
+	msg.post( '/basehud/level#finger', 'play_animation', { id=hash(finger_imgs[level]) })
 end
 
 
@@ -111,18 +130,23 @@ function show_flag( self, flag )
 	end
 	if( flag == 'ready_go' ) then
 		print( 'start-anim phase 1' )
+		sound.play( '#sound_start' )
 		go.animate( '/basehud/flag_ready', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, start_anim2 )
 	elseif( flag == 'game_over' ) then
 		print( 'gameover-anim phase 1' )
+		sound.play( '#sound_end' )
 		go.animate( '/basehud/flag_gameover', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5 )
 	elseif( flag == 'game_exit' ) then
 		print( 'gameexit-anim phase 1' )
+		sound.play( '#sound_end' )
 		go.animate( '/basehud/flag_exit', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, gameexit_anim2 )
 	elseif( flag == 'player_wins' ) then
 		print( 'winning-anim phase 1' )
+		sound.play( '#sound_end' )
 		go.animate( '/basehud/flag_playerwins', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, winning_anim2 )
 	elseif( flag == 'player_loses' ) then
 		print( 'losing-anim phase 1' )
+		sound.play( '#sound_end' )
 		go.animate( '/basehud/flag_playerloses', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5 )
 	else
 		print('unknown flag', flag )
@@ -138,11 +162,13 @@ function init(self)
 	self.score = 0
 	self.hits  = 0
 	self.level = 0
+	self.finger_level = 1
 	self.game_script = false
 
 	render_score( self.score )
 	render_hits( self.hits )
 	render_level( self.level, false )
+	render_fingerlevel( self.finger_level, false )
 
 	msg.post( '.', 'acquire_input_focus' )
 end
@@ -187,6 +213,9 @@ function on_message(self, message_id, message, sender)
 	elseif( message_id == hash('set_level') ) then
 		self.level = message.level
 		render_level( self.level, false )
+	elseif( message_id == hash('finger_up') ) then
+		self.level = self.level + 1
+		render_fingerlevel( self.level, true )
 
 	elseif( message_id == hash('anim_complete') ) then
 		-- TODO: if we animate anything else, we'll need to decipher it here
