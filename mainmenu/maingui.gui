@@ -97,26 +97,17 @@ nodes {
 }
 nodes {
   position {
-    x: 930.0
-    y: 64.0
-  }
-  scale {
-    x: 2.0
-    y: 2.0
+    x: 820.0
+    y: 500.0
   }
   size {
-    x: 50.0
-    y: 50.0
+    x: 200.0
+    y: 100.0
   }
   type: TYPE_TEXT
-  text: "Exit"
-  font: "system_font"
-  id: "textExitGame"
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
+  text: "Level?"
+  font: "mainmenu"
+  id: "titleText2"
   shadow {
     x: 1.0
     y: 1.0
@@ -210,6 +201,24 @@ nodes {
 }
 nodes {
   position {
+    x: 256.0
+    y: 100.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  color {
+    z: 0.0
+  }
+  type: TYPE_TEXT
+  text: "B-Pop"
+  font: "medfont"
+  id: "select_darts"
+  inherit_alpha: true
+}
+nodes {
+  position {
     x: 128.0
     y: 600.0
   }
@@ -254,41 +263,6 @@ nodes {
 }
 nodes {
   position {
-    x: 768.0
-    y: 500.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "Level?"
-  font: "mainmenu"
-  id: "titleText2"
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-  inherit_alpha: true
-}
-nodes {
-  position {
-    x: 512.0
-    y: 64.0
-  }
-  scale {
-    x: 0.5
-    y: 0.5
-  }
-  type: TYPE_BOX
-  texture: "stall_atlas/logo1"
-  id: "bt_logo"
-  inherit_alpha: true
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  position {
     x: 736.0
     y: 400.0
   }
@@ -308,7 +282,7 @@ nodes {
 nodes {
   position {
     x: 820.0
-    y: 350.0
+    y: 375.0
   }
   scale {
     x: 0.3
@@ -325,8 +299,8 @@ nodes {
 }
 nodes {
   position {
-    x: 736.0
-    y: 300.0
+    x: 904.0
+    y: 350.0
   }
   scale {
     x: 0.3
@@ -343,8 +317,8 @@ nodes {
 }
 nodes {
   position {
-    x: 820.0
-    y: 250.0
+    x: 736.0
+    y: 275.0
   }
   scale {
     x: 0.3
@@ -361,8 +335,8 @@ nodes {
 }
 nodes {
   position {
-    x: 736.0
-    y: 200.0
+    x: 820.0
+    y: 250.0
   }
   scale {
     x: 0.3
@@ -379,8 +353,8 @@ nodes {
 }
 nodes {
   position {
-    x: 820.0
-    y: 150.0
+    x: 904.0
+    y: 225.0
   }
   scale {
     x: 0.3
@@ -397,21 +371,63 @@ nodes {
 }
 nodes {
   position {
-    x: 256.0
-    y: 100.0
+    x: 625.0
+    y: 64.0
   }
-  size {
-    x: 200.0
-    y: 100.0
+  scale {
+    x: 0.5
+    y: 0.5
   }
-  color {
-    z: 0.0
-  }
-  type: TYPE_TEXT
-  text: "B-Pop"
-  font: "medfont"
-  id: "select_darts"
+  type: TYPE_BOX
+  texture: "stall_atlas/question"
+  id: "credits"
   inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 725.0
+    y: 64.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/settings"
+  id: "settings"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 825.0
+    y: 65.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/exit"
+  id: "exit_game"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 925.0
+    y: 64.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/logo1"
+  id: "bt_logo"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

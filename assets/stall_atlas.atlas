@@ -79,4 +79,13 @@ images {
 images {
   image: "/assets/kenney.nl/Stall/bg_wood_lt.png"
 }
+images {
+  image: "/assets/question.png"
+}
+images {
+  image: "/assets/settings.png"
+}
+images {
+  image: "/assets/exit.png"
+}
 extrude_borders: 2
