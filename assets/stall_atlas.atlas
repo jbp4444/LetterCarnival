@@ -53,25 +53,25 @@ images {
   image: "/assets/kenney.nl/Stall/curtain_straight_green.png"
 }
 images {
-  image: "/assets/logo1.png"
+  image: "/assets/diy/logo1.png"
 }
 images {
-  image: "/assets/finger1.png"
+  image: "/assets/diy/finger1.png"
 }
 images {
-  image: "/assets/finger12.png"
+  image: "/assets/diy/finger12.png"
 }
 images {
-  image: "/assets/finger123.png"
+  image: "/assets/diy/finger123.png"
 }
 images {
-  image: "/assets/finger1234.png"
+  image: "/assets/diy/finger1234.png"
 }
 images {
-  image: "/assets/finger12345.png"
+  image: "/assets/diy/finger12345.png"
 }
 images {
-  image: "/assets/finger12345X.png"
+  image: "/assets/diy/finger12345X.png"
 }
 images {
   image: "/assets/kenney.nl/Stall/bg_wood_dk.png"
@@ -80,12 +80,15 @@ images {
   image: "/assets/kenney.nl/Stall/bg_wood_lt.png"
 }
 images {
-  image: "/assets/question.png"
+  image: "/assets/flaticons/question.png"
 }
 images {
-  image: "/assets/settings.png"
+  image: "/assets/flaticons/settings.png"
 }
 images {
-  image: "/assets/exit.png"
+  image: "/assets/flaticons/exit.png"
+}
+images {
+  image: "/assets/flaticons/back.png"
 }
 extrude_borders: 2

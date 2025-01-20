@@ -71,16 +71,13 @@ images {
   image: "/assets/kenney.nl/HUD/text_timeup.png"
 }
 images {
-  image: "/assets/transparent32.png"
+  image: "/assets/diy/transparent32.png"
 }
 images {
   image: "/assets/kenney.nl/HUD/text_cross_trans.png"
 }
 images {
-  image: "/assets/stick_metal_long.png"
-}
-images {
-  image: "/assets/button_back.png"
+  image: "/assets/diy/stick_metal_long.png"
 }
 images {
   image: "/assets/kenney.nl/HUD/icon_duck.png"
@@ -89,21 +86,24 @@ images {
   image: "/assets/kenney.nl/HUD/icon_target.png"
 }
 images {
-  image: "/assets/finger1_sm.png"
+  image: "/assets/diy/finger1_sm.png"
 }
 images {
-  image: "/assets/finger12_sm.png"
+  image: "/assets/diy/finger12_sm.png"
 }
 images {
-  image: "/assets/finger123_sm.png"
+  image: "/assets/diy/finger123_sm.png"
 }
 images {
-  image: "/assets/finger1234_sm.png"
+  image: "/assets/diy/finger1234_sm.png"
 }
 images {
-  image: "/assets/finger12345_sm.png"
+  image: "/assets/diy/finger12345_sm.png"
 }
 images {
-  image: "/assets/finger12345X_sm.png"
+  image: "/assets/diy/finger12345X_sm.png"
+}
+images {
+  image: "/assets/flaticons/back.png"
 }
 extrude_borders: 2

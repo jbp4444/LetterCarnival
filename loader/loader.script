@@ -12,6 +12,7 @@ function init(self)
 	print( 'loader - init' )
 end
 
+
 function on_message(self, message_id, message, sender)
 	print( 'loader - msg -', message_id )
 
@@ -34,6 +35,10 @@ function on_message(self, message_id, message, sender)
 		msg.post( "go#whack", "unload" )
 	elseif( self.current == 'darts' ) then
 		msg.post( "go#darts", "unload" )
+	elseif( self.current == 'settings' ) then
+		msg.post( "go#settings", "unload" )
+	elseif( self.current == 'credits' ) then
+		msg.post( "go#credits", "unload" )
 	end
 
 	if message_id == hash("start_shooting") then
@@ -44,21 +49,39 @@ function on_message(self, message_id, message, sender)
 			end
 		)
 	elseif message_id == hash("start_racing") then
-		msg.post("go#racing", "load", message )
-		msg.post("go#racing", "enable")
-		self.current = 'racing'
+		sound.play( '#startSound', {}, function()
+			msg.post("go#racing", "load", message )
+			msg.post("go#racing", "enable")
+			self.current = 'racing'
+			end
+		)
 	elseif message_id == hash("start_whack") then
-		msg.post("go#whack", "load", message )
-		msg.post("go#whack", "enable")
-		self.current = 'whack'
+		sound.play( '#startSound', {}, function()
+			msg.post("go#whack", "load", message )
+			msg.post("go#whack", "enable")
+			self.current = 'whack'
+			end
+		)
+	elseif message_id == hash("start_darts") then
+		sound.play( '#startSound', {}, function()
+			msg.post("go#darts", "load", message )
+			msg.post("go#darts", "enable")
+			self.current = 'darts'
+			end
+		)
+
 	elseif message_id == hash("start_mainmenu") then
 		msg.post("go#mainmenu", "load" )
 		msg.post("go#mainmenu", "enable")
 		self.current = 'mainmenu'
-	elseif message_id == hash("start_darts") then
-		msg.post("go#darts", "load" )
-		msg.post("go#darts", "enable")
-		self.current = 'darts'
+	elseif message_id == hash("start_settings") then
+		msg.post("go#settings", "load" )
+		msg.post("go#settings", "enable")
+		self.current = 'settings'
+	elseif message_id == hash("start_credits") then
+		msg.post("go#credits", "load" )
+		msg.post("go#credits", "enable")
+		self.current = 'credits'
 	end
 
 end

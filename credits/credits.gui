@@ -1,0 +1,158 @@
+script: "/credits/credits.gui_script"
+fonts {
+  name: "mainmenu"
+  font: "/assets/mainmenu.font"
+}
+fonts {
+  name: "medfont"
+  font: "/assets/medfont.font"
+}
+fonts {
+  name: "system_font"
+  font: "/builtins/fonts/default.font"
+}
+textures {
+  name: "stall_atlas"
+  texture: "/assets/stall_atlas.atlas"
+}
+nodes {
+  position {
+    x: 128.0
+    y: 320.0
+    z: -1.0
+  }
+  scale {
+    y: 2.5
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/bg_green"
+  id: "box"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 384.0
+    y: 320.0
+    z: -1.0
+  }
+  scale {
+    y: -2.5
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/bg_green"
+  id: "box1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 640.0
+    y: 320.0
+    z: -1.0
+  }
+  scale {
+    y: 2.5
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/bg_green"
+  id: "box2"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 896.0
+    y: 320.0
+    z: -1.0
+  }
+  scale {
+    y: -2.5
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/bg_green"
+  id: "box3"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 512.0
+    y: 500.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Special Thanks to ..."
+  font: "mainmenu"
+  id: "titleText"
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 128.0
+    y: 600.0
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/curtain_straight_green"
+  id: "curtain1"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 384.0
+    y: 600.0
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/curtain_straight_green"
+  id: "curtain2"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 640.0
+    y: 600.0
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/curtain_straight_green"
+  id: "curtain3"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 896.0
+    y: 600.0
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/curtain_straight_green"
+  id: "curtain4"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 925.0
+    y: 65.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/back"
+  id: "back_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
