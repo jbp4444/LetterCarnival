@@ -87,3 +87,9 @@ embedded_components {
   data: "sound: \"/assets/kenney.nl/audio/impactGlass_heavy_000.ogg\"\n"
   ""
 }
+embedded_components {
+  id: "movement"
+  type: "sound"
+  data: "sound: \"/assets/zapsplat/science_fiction_ufo_hover.ogg\"\n"
+  ""
+}
