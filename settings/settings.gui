@@ -1,11 +1,11 @@
 script: "/settings/settings.gui_script"
 fonts {
   name: "mainmenu"
-  font: "/assets/mainmenu.font"
+  font: "/assets/fonts/mainmenu.font"
 }
 fonts {
   name: "medfont"
-  font: "/assets/medfont.font"
+  font: "/assets/fonts/medfont.font"
 }
 fonts {
   name: "system_font"
