@@ -15,6 +15,10 @@ textures {
   name: "stall_atlas"
   texture: "/assets/stall_atlas.atlas"
 }
+textures {
+  name: "logos"
+  texture: "/assets/logos.atlas"
+}
 nodes {
   position {
     x: 128.0
@@ -85,7 +89,7 @@ nodes {
     y: 100.0
   }
   type: TYPE_TEXT
-  text: "Special Thanks to ..."
+  text: "Special Thanks To:"
   font: "mainmenu"
   id: "titleText"
   shadow {
@@ -151,6 +155,99 @@ nodes {
   type: TYPE_BOX
   texture: "stall_atlas/back"
   id: "back_button"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 181.0
+    y: 333.0
+  }
+  type: TYPE_BOX
+  texture: "logos/defold"
+  id: "defold"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 791.0
+    y: 333.0
+  }
+  type: TYPE_BOX
+  texture: "logos/kenney"
+  id: "kenney"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 797.0
+    y: 196.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "logos/open-game-art"
+  id: "opengameart"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 188.0
+    y: 195.0
+  }
+  scale {
+    x: 1.2
+    y: 1.2
+  }
+  type: TYPE_BOX
+  texture: "logos/Zapsplat-logo"
+  id: "zapsplat"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 195.0
+    y: 81.0
+  }
+  type: TYPE_BOX
+  texture: "logos/flaticons"
+  id: "flaticons"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 483.0
+    y: 83.0
+  }
+  scale {
+    x: 0.6
+    y: 0.6
+  }
+  type: TYPE_BOX
+  texture: "logos/fontspace"
+  id: "fontspace"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 463.0
+    y: 330.0
+  }
+  scale {
+    x: 0.65
+    y: 0.65
+  }
+  type: TYPE_BOX
+  texture: "logos/krita"
+  id: "krita"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }

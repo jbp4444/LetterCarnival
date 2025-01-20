@@ -11,6 +11,10 @@ fonts {
   name: "system_font"
   font: "/builtins/fonts/default.font"
 }
+fonts {
+  name: "titlefont"
+  font: "/mainmenu/titlefont.font"
+}
 textures {
   name: "stall_atlas"
   texture: "/assets/stall_atlas.atlas"
@@ -77,8 +81,24 @@ nodes {
 }
 nodes {
   position {
+    x: 512.0
+    y: 530.0
+    z: 0.9
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Letter Carnival"
+  font: "titlefont"
+  id: "main_title"
+  inherit_alpha: true
+}
+nodes {
+  position {
     x: 256.0
-    y: 500.0
+    y: 400.0
   }
   size {
     x: 200.0
@@ -86,7 +106,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "Game?"
-  font: "mainmenu"
+  font: "medfont"
   id: "titleText"
   shadow {
     x: 1.0
@@ -98,7 +118,7 @@ nodes {
 nodes {
   position {
     x: 820.0
-    y: 500.0
+    y: 400.0
   }
   size {
     x: 200.0
@@ -106,7 +126,7 @@ nodes {
   }
   type: TYPE_TEXT
   text: "Level?"
-  font: "mainmenu"
+  font: "medfont"
   id: "titleText2"
   shadow {
     x: 1.0
@@ -118,7 +138,7 @@ nodes {
 nodes {
   position {
     x: 256.0
-    y: 400.0
+    y: 325.0
   }
   size {
     x: 333.0
@@ -146,19 +166,19 @@ nodes {
 nodes {
   position {
     x: 256.0
-    y: 200.0
+    y: 250.0
   }
   size {
-    x: 355.0
+    x: 300.0
     y: 100.0
   }
   color {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "H-Racing"
+  text: "Whack-a-M"
   font: "medfont"
-  id: "select_racing"
+  id: "select_whack"
   outline {
     x: 1.0
     y: 1.0
@@ -174,19 +194,19 @@ nodes {
 nodes {
   position {
     x: 256.0
-    y: 300.0
+    y: 175.0
   }
   size {
-    x: 300.0
+    x: 355.0
     y: 100.0
   }
   color {
     z: 0.0
   }
   type: TYPE_TEXT
-  text: "Whack-a-M"
+  text: "H-Racing"
   font: "medfont"
-  id: "select_whack"
+  id: "select_racing"
   outline {
     x: 1.0
     y: 1.0
@@ -220,7 +240,7 @@ nodes {
 nodes {
   position {
     x: 128.0
-    y: 600.0
+    y: 620.0
   }
   type: TYPE_BOX
   texture: "stall_atlas/curtain_straight_blue"
@@ -231,7 +251,7 @@ nodes {
 nodes {
   position {
     x: 384.0
-    y: 600.0
+    y: 620.0
   }
   type: TYPE_BOX
   texture: "stall_atlas/curtain_straight_blue"
@@ -242,7 +262,7 @@ nodes {
 nodes {
   position {
     x: 640.0
-    y: 600.0
+    y: 620.0
   }
   type: TYPE_BOX
   texture: "stall_atlas/curtain_straight_blue"
@@ -253,7 +273,7 @@ nodes {
 nodes {
   position {
     x: 896.0
-    y: 600.0
+    y: 620.0
   }
   type: TYPE_BOX
   texture: "stall_atlas/curtain_straight_blue"
@@ -264,7 +284,7 @@ nodes {
 nodes {
   position {
     x: 736.0
-    y: 400.0
+    y: 325.0
   }
   scale {
     x: 0.3
@@ -282,7 +302,7 @@ nodes {
 nodes {
   position {
     x: 820.0
-    y: 375.0
+    y: 300.0
   }
   scale {
     x: 0.3
@@ -300,7 +320,7 @@ nodes {
 nodes {
   position {
     x: 904.0
-    y: 350.0
+    y: 275.0
   }
   scale {
     x: 0.3
@@ -318,7 +338,7 @@ nodes {
 nodes {
   position {
     x: 736.0
-    y: 275.0
+    y: 200.0
   }
   scale {
     x: 0.3
@@ -336,7 +356,7 @@ nodes {
 nodes {
   position {
     x: 820.0
-    y: 250.0
+    y: 175.0
   }
   scale {
     x: 0.3
@@ -354,7 +374,7 @@ nodes {
 nodes {
   position {
     x: 904.0
-    y: 225.0
+    y: 150.0
   }
   scale {
     x: 0.3

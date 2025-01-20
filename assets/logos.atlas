@@ -1,0 +1,22 @@
+images {
+  image: "/assets/logos/defold.png"
+}
+images {
+  image: "/assets/logos/flaticons.png"
+}
+images {
+  image: "/assets/logos/kenney.png"
+}
+images {
+  image: "/assets/logos/krita.png"
+}
+images {
+  image: "/assets/logos/open-game-art.jpg"
+}
+images {
+  image: "/assets/logos/Zapsplat-logo.png"
+}
+images {
+  image: "/assets/logos/fontspace.png"
+}
+extrude_borders: 2
