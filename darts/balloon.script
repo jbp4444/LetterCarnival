@@ -4,6 +4,7 @@ function on_message( self, message_id, message, sender )
 	-- Add message-handling code here
 	if( message_id == hash('pop') ) then
 		print( 'starting pop animation' )
+		sound.play( '#sound' )
 		msg.post( '.', 'disable' )
 	elseif( message_id == hash('inflate') ) then
 		print( 'starting inflate animation' )

@@ -139,7 +139,7 @@ function on_input( self, action_id, action )
 				obj.state = 'popped'
 				self.last_tgts:pushRight( 'hit' )
 				msg.post( obj.obj, 'pop' )
-				msg.post( '/basehud/hud', 'score', {score=5,mole_id=i} )
+				msg.post( '/basehud/hud', 'score', {score=5,mole_id=i,quiet=true} )
 				miss = false
 				break
 			end

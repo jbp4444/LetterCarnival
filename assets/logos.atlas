@@ -1,7 +1,4 @@
 images {
-  image: "/assets/logos/defold.png"
-}
-images {
   image: "/assets/logos/flaticons.png"
 }
 images {
@@ -18,5 +15,11 @@ images {
 }
 images {
   image: "/assets/logos/fontspace.png"
+}
+images {
+  image: "/assets/logos/audacity.png"
+}
+images {
+  image: "/assets/logos/defold.png"
 }
 extrude_borders: 2

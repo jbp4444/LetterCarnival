@@ -176,7 +176,9 @@ end
 function on_message(self, message_id, message, sender)
 	-- Add message-handling code here
 	if( message_id == hash('score') ) then
-		sound.play( 'score#sound' )
+		if( not message.quiet ) then
+			sound.play( 'score#sound' )
+		end
 		self.score = self.score + message.score
 		render_score( self.score )
 

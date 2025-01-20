@@ -60,3 +60,9 @@ embedded_components {
     y: 0.7
   }
 }
+embedded_components {
+  id: "sound"
+  type: "sound"
+  data: "sound: \"/assets/zapsplat/zapsplat_foley_balloon_pop_20568.ogg\"\n"
+  ""
+}

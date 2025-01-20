@@ -6,6 +6,7 @@ Made with Defold -- https://defold.com
 
 Additional Tools:
 * https://krita.org/ - Krita for graphics/image modifications
+* https://audacityteam.org/ - Audacity for mp3/ogg (sound) file conversions
 
 Artwork and Sound credits:
 * https://kenney.nl  (of course)
