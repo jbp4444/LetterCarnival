@@ -20,4 +20,6 @@ Artwork and Sound credits:
 * https://www.zapsplat.com/
 * https://www.fontspace.com/
   * https://www.fontspace.com/ringmaster-font-f6208
+* https://icon-library.com/download_452054.svg.html
+  * https://icon-library.com/download_452054.svg.html>Hourglass,Measuring instrument,Clip art,Scale,Tool # 62592
 

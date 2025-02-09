@@ -154,5 +154,35 @@ nodes {
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
+nodes {
+  position {
+    x: 200.0
+    y: 350.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Sound"
+  font: "medfont"
+  id: "sound"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 350.0
+    y: 350.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/toggle_on"
+  id: "sound_chk"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

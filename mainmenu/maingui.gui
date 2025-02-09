@@ -89,6 +89,11 @@ nodes {
     x: 200.0
     y: 100.0
   }
+  color {
+    x: 0.397
+    y: 0.201
+    z: 0.003
+  }
   type: TYPE_TEXT
   text: "Letter Carnival"
   font: "titlefont"

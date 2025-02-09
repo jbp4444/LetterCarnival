@@ -13,7 +13,7 @@ input_method = HiddenInputField
 
 [project]
 title = Letter Carnival
-version = 20210127.1
+version = 20250209.1
 publisher = Blue-Turtle.Net
 dependencies#0 = https://github.com/jbp4444/bzAnim/archive/refs/heads/main.zip
 

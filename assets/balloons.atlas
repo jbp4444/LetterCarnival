@@ -25,4 +25,43 @@ images {
 images {
   image: "/assets/opengameart/balloon_purple.png"
 }
+images {
+  image: "/assets/diy/hg_0.png"
+}
+images {
+  image: "/assets/diy/hg_10.png"
+}
+images {
+  image: "/assets/diy/hg_20.png"
+}
+images {
+  image: "/assets/diy/hg_30.png"
+}
+images {
+  image: "/assets/diy/hg_40.png"
+}
+images {
+  image: "/assets/diy/hg_50.png"
+}
+images {
+  image: "/assets/diy/hg_60.png"
+}
+images {
+  image: "/assets/diy/hg_70.png"
+}
+images {
+  image: "/assets/diy/hg_80.png"
+}
+images {
+  image: "/assets/diy/hg_90.png"
+}
+images {
+  image: "/assets/diy/hg_100.png"
+}
+images {
+  image: "/assets/diy/hg_xx.png"
+}
+images {
+  image: "/assets/diy/hg_glow.png"
+}
 extrude_borders: 2

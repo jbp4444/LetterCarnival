@@ -60,8 +60,8 @@ end
 
 function M.randomLetter()
 	-- prep the underlying structures so we can calc letters
-	if( globals.level ~= last_level ) then
-		last_level = globals.level
+	if( globals.finger_level ~= last_level ) then
+		last_level = globals.finger_level
 		letters = {}
 		for i=1,last_level do
 			for j=1,#letter_lists[i] do
@@ -86,20 +86,6 @@ function M.randomLetter()
 		end
 		M.shuffle( letters_cache )
 	end
-
--- 	rn = math.random()
--- 	print( 'rn=', rn, lfreq[1],lfreq[2] )
--- 	local ltr = 'A'
--- 	for i = 1,#letters do
--- 		if( (rn >= lfreq[i]) and (rn < lfreq[i+1]) ) then
--- 			ltr = letters[i]
--- 			break
--- 		end
--- 	end
-
-	-- local rn = math.random( #letters )
-	-- print( 'rand letter = '..letters[rn]..'   '..tostring(rn) )
-	-- return letters[rn]
 
 	ltr = table.remove( letters_cache )
 	return ltr

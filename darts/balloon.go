@@ -2,6 +2,10 @@ components {
   id: "script"
   component: "/darts/balloon.script"
 }
+components {
+  id: "sparkle"
+  component: "/darts/sparkle.particlefx"
+}
 embedded_components {
   id: "sprite"
   type: "sprite"

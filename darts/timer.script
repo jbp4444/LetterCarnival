@@ -1,0 +1,57 @@
+
+function init(self)
+	self.timer = 0
+	self.duration = 10.0
+	self.active = false
+	self.game_script = false
+	msg.post( '#sprite-glow', 'disable' )
+end
+
+
+function final(self)
+	go.delete()
+end
+
+
+function update(self, dt)
+	if ( self.active ) then
+		self.timer = self.timer + dt
+
+		local pct = 1.0 - self.timer / self.duration
+		if ( pct > 1.0 ) then
+			pct = 1.0
+		elseif ( pct < 0.0 ) then
+			pct = 0.0
+		end
+		pct100 = math.floor(10*pct)*10
+		msg.post( '#sprite', 'play_animation', {id=hash('hg_'..pct100)} )
+
+		if( pct100 < 20 ) then
+			msg.post( '#sprite-glow', 'enable' )
+		end
+
+		if( self.timer >= self.duration ) then
+			print('timer is done', self.game_script)
+			self.active = false
+			if( self.game_script ) then
+				print('sending timer-done to', self.game_script)
+				msg.post( self.game_script, 'timer_done' )
+			end
+		end
+	end
+end
+
+
+function on_message(self, message_id, message, sender)
+	if( message_id == hash('start') ) then
+		self.active = true
+		self.timer = 0
+		print('timer sender', sender)
+		self.game_script = sender
+		print( 'timer started', self.duration )
+
+	elseif( message_id == hash('stop') ) then
+		self.active = false
+	end
+end
+

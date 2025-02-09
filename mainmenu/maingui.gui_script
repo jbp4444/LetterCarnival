@@ -57,9 +57,9 @@ function on_input(self, action_id, action)
 			for i=1,6 do
 				local nd = gui.get_node( 'select_level'..i )
 				if( gui.pick_node(nd,action.x,action.y) ) then
-					print( 'level '..i..' selected' )
-					globals.level = i
-					sound.play( '#level'..i..'sound' )
+					print( 'finger level '..i..' selected' )
+					globals.finger_level = i
+					sound.play( '#levelsound' )
 					recolor_level()
 				end
 			end

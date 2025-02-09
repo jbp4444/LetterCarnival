@@ -239,6 +239,15 @@ instances {
     y: 0.65
   }
 }
+instances {
+  id: "timer"
+  prototype: "/darts/timer.go"
+  position {
+    x: 50.0
+    y: 482.0
+    z: 0.99
+  }
+}
 collection_instances {
   id: "basehud"
   collection: "/basehud/main.collection"

@@ -5,6 +5,10 @@ function on_message( self, message_id, message, sender )
 	if( message_id == hash('pop') ) then
 		print( 'starting pop animation' )
 		sound.play( '#sound' )
+		particlefx.play( '#sparkle' )
+		-- timer.delay(1.0, false, function()
+		--	go.delete(pobj)
+		-- end)
 		msg.post( '.', 'disable' )
 	elseif( message_id == hash('inflate') ) then
 		print( 'starting inflate animation' )
