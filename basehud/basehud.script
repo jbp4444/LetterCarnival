@@ -5,7 +5,6 @@ local bz = require("bzAnim.bzLibrary")
 local digits = { 'score#digit1000', 'score#digit100', 'score#digit10', 'score#digit1' }
 local health_go = { '/basehud/health#health1', '/basehud/health#health2', '/basehud/health#health3', '/basehud/health#health4', '/basehud/health#health5' }
 local level_go = { '/basehud/level#level1', '/basehud/level#level2', '/basehud/level#level3', '/basehud/level#level4', '/basehud/level#level5' }
-local flags_go = { '/basehud/flag_go', '/basehud/flag_ready', '/basehud/flag_gameover', '/basehud/flag_exit', '/basehud/flag_playerloses', '/basehud/flag_playerwins' }
 local finger_imgs = { 'finger1_sm', 'finger12_sm', 'finger123_sm', 'finger1234_sm', 'finger12345_sm', 'finger12345X_sm' }
 
 
@@ -86,23 +85,38 @@ function render_fingerlevel( level, show_splash )
 end
 
 
-function start_anim4( self )
-	print( 'start-anim phase 4' )
+function start_anim5( self )
+	print( 'start-anim phase 5' )
 	if( self.game_script ~= nil ) then
 		print( 'sending game_start msg to ', self.game_script )
 		msg.post( self.game_script, 'game_start' )
 	end
 end
+function gameover_anim2( self )
+	print( 'gameover-anim phase 2' )
+	if( self.game_script ~= nil ) then
+		print( 'sending game_over msg to ', self.game_script )
+		msg.post( self.game_script, 'game_over' )
+	end
+end
+function start_anim4( self )
+	print( 'start-anim phase 4' )
+	go.animate( '/basehud/flag', 'euler.z', go.PLAYBACK_ONCE_FORWARD, -90, go.EASING_LINEAR, 0.5, 0.33, start_anim5 )
+end
 function start_anim3( self )
 	print( 'start-anim phase 3' )
-	go.set( '/basehud/flag_go', 'euler.z', 0 )
-	go.animate( '/basehud/flag_go', 'euler.z', go.PLAYBACK_ONCE_FORWARD, -90, go.EASING_LINEAR, 0.5, 0.33, start_anim4 )
+	go.set( '/basehud/flag', 'euler.z', 90 )
+	msg.post( 'flag#ready', 'disable' )
+	msg.post( 'flag#goflag', 'enable' )
+	go.animate( '/basehud/flag', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0.33, start_anim4 )
 end
 function start_anim2( self )
 	print( 'start-anim phase 2' )
-	go.set( '/basehud/flag_ready', 'euler.z', 0 )
-	go.animate( '/basehud/flag_ready', 'euler.z', go.PLAYBACK_ONCE_FORWARD, -90, go.EASING_LINEAR, 0.5, 0.33 )
-	go.animate( '/basehud/flag_go', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0.33, start_anim3 )
+	go.animate( '/basehud/flag', 'euler.z', go.PLAYBACK_ONCE_FORWARD, -90, go.EASING_LINEAR, 0.5, 0.33, start_anim3 )
+end
+function levelup_anim2( self )
+	print( 'levelup-anim phase 2' )
+	go.animate( '/basehud/flag', 'euler.z', go.PLAYBACK_ONCE_FORWARD, -90, go.EASING_LINEAR, 0.5, 0.33 )
 end
 function gameexit_anim2( self )
 	print( 'gameexit-anim phase 2' )
@@ -115,37 +129,48 @@ function gameexit_anim2( self )
 end
 function winning_anim2( self )
 	print( 'winning-anim phase 2' )
-	particlefx.play( '/basehud/flag_playerwins#fireworks' )
-	-- msg.post( '/basehud/backbutton#sprite', 'enable' )
+	particlefx.play( 'flag#sparkle' )
 end
 
 function show_flag( self, flag )
-	-- rotate out any existing flags
-	for i=1,#flags_go do
-		rot_q = go.get_world_rotation( flags_go[i] )
-		print( i, rot_q )
-		if( rot_q.w >= 0.98 ) then
-			go.animate( flags_go[i], 'euler.z', go.PLAYBACK_ONCE_FORWARD, -180, go.EASING_LINEAR, 0.50 )
-		end
-	end
+	-- reset everything
+	msg.post( 'flag#ready', 'disable' )
+	msg.post( 'flag#gameover', 'disable' )
+	msg.post( 'flag#goflag', 'disable' )
+	msg.post( 'flag#label', 'disable' )
+	go.set( 'flag', 'euler.z', 90 )
 	if( flag == 'ready_go' ) then
 		print( 'start-anim phase 1' )
+		msg.post( 'flag#ready', 'enable' )
 		sound.play( '#sound_start' )
-		go.animate( '/basehud/flag_ready', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, start_anim2 )
+		go.animate( '/basehud/flag', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, start_anim2 )
+	elseif( flag == 'level_up' ) then
+		print( 'levelup-anim phase 1' )
+		label.set_text( 'flag', 'Level Up!' )
+		msg.post( 'flag#label', 'enable' )
+		sound.play( '#sound_start' )
+		go.animate( '/basehud/flag', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, levelup_anim2 )
 	elseif( flag == 'game_over' ) then
 		print( 'gameover-anim phase 1' )
+		msg.post( 'flag#gameover', 'enable' )
 		sound.play( '#sound_end' )
-		go.animate( '/basehud/flag_gameover', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5 )
+		go.animate( '/basehud/flag', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, gameover_anim2 )
 	elseif( flag == 'game_exit' ) then
 		print( 'gameexit-anim phase 1' )
+		label.set_text( 'flag#label', 'Exitting' )
+		msg.post( 'flag#label', 'enable' )
 		sound.play( '#sound_end' )
-		go.animate( '/basehud/flag_exit', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, gameexit_anim2 )
+		go.animate( '/basehud/flag', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, gameexit_anim2 )
 	elseif( flag == 'player_wins' ) then
 		print( 'winning-anim phase 1' )
+		label.set_text( 'flag#label', 'Player Wins!' )
+		msg.post( 'flag#label', 'enable' )
 		sound.play( '#sound_end' )
-		go.animate( '/basehud/flag_playerwins', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, winning_anim2 )
+		go.animate( '/basehud/flag', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5, 0, winning_anim2 )
 	elseif( flag == 'player_loses' ) then
 		print( 'losing-anim phase 1' )
+		label.set_text( 'flag#label', 'Player Loses' )
+		msg.post( 'flag#label', 'enable' )
 		sound.play( '#sound_end' )
 		go.animate( '/basehud/flag_playerloses', 'euler.z', go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.5 )
 	else

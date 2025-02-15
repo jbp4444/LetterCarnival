@@ -87,8 +87,12 @@ function on_message(self, message_id, message, sender)
 	elseif( message_id == hash('game_over') ) then
 		self.active = false
 	elseif( message_id == hash('back_button') ) then
-		self.active = false
-		msg.post( '/basehud/hud', 'game_exit' )
+		if( self.active ) then
+			self.active = false
+			msg.post( '/basehud/hud', 'game_exit' )
+		else
+			msg.post( 'loader:/go#loader', 'start_mainmenu' )
+		end
 	elseif( message_id == hash('final_exit') ) then
 		self.active = false
 		msg.post( 'loader:/go#loader', 'start_mainmenu' )

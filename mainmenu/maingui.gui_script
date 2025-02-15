@@ -7,14 +7,14 @@ function recolor_level()
 		gui.set_color( nd, vmath.vector4(1,1,0,1))
 	end
 
-	local nd = gui.get_node( 'select_level'..globals.level )
+	local nd = gui.get_node( 'select_level'..globals.finger_level )
 	gui.set_color( nd, vmath.vector4(1,0,0,1))
 end
 
 function init(self)
 	msg.post( ".", "acquire_input_focus" )
 
-	globals.level = 1
+	globals.finger_level = 1
 	recolor_level()
 end
 

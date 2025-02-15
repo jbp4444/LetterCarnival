@@ -64,4 +64,7 @@ images {
 images {
   image: "/assets/diy/hg_glow.png"
 }
+images {
+  image: "/assets/opengameart/balloon_white.png"
+}
 extrude_borders: 2

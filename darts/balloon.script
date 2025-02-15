@@ -19,6 +19,7 @@ function on_message( self, message_id, message, sender )
 		self.color = message.color
 		label.set_text( '#label', self.letter )
 		msg.post( '#sprite', 'play_animation', {id=hash(self.color)} )
+		-- go.set( '#sprite', 'tint', vmath.vector4(1,0,0,1))
 		msg.post( '.', 'enable' )
 	end
 end

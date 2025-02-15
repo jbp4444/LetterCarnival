@@ -17,24 +17,9 @@ images {
   image: "/assets/diy/horse_light_green.png"
 }
 images {
-  image: "/assets/flaticons/circle256.png"
-}
-images {
-  image: "/assets/diy/circle256half.png"
-}
-images {
-  image: "/assets/flaticons/circle128.png"
-}
-images {
-  image: "/assets/flaticons/circle32.png"
-}
-images {
-  image: "/assets/flaticons/circle64.png"
-}
-images {
   image: "/assets/diy/circle256half2.png"
 }
 images {
-  image: "/assets/diy/circle256border.png"
+  image: "/assets/flaticons/circle32.png"
 }
 extrude_borders: 2

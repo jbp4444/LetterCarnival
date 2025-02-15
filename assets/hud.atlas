@@ -106,4 +106,7 @@ images {
 images {
   image: "/assets/flaticons/back.png"
 }
+images {
+  image: "/assets/diy/circle256border.png"
+}
 extrude_borders: 2

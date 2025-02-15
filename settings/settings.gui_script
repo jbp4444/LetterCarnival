@@ -2,6 +2,20 @@
 local globals = require( 'lib.GlobalVars' )
 
 function init(self)
+	-- set the checkboxes based on current global vals
+	local sound_chk = gui.get_node("sound_chk")
+	local music_chk = gui.get_node("music_chk")
+	if( globals.sound ) then
+		gui.play_flipbook(sound_chk, 'toggle_on')
+	else
+		gui.play_flipbook(sound_chk, 'toggle_off')
+	end
+	if( globals.bg_music ) then
+		gui.play_flipbook(music_chk, 'toggle_on')
+	else
+		gui.play_flipbook(music_chk, 'toggle_off')
+	end
+
 	msg.post( ".", "acquire_input_focus" )
 end
 
@@ -11,17 +25,28 @@ function on_input(self, action_id, action)
 		local back_button  = gui.get_node("back_button")
 		local sound_txt = gui.get_node("sound")
 		local sound_chk = gui.get_node("sound_chk")
+		local music_txt = gui.get_node("music")
+		local music_chk = gui.get_node("music_chk")
 
 		if( gui.pick_node(back_button,action.x,action.y) ) then
 			msg.post( "loader:/go#loader", "start_mainmenu" )
 
 		elseif( gui.pick_node(sound_txt,action.x,action.y) or gui.pick_node(sound_chk,action.x,action.y) ) then
 			if( globals.sound ) then
-				global.sound = false
+				globals.sound = false
 				gui.play_flipbook(sound_chk, 'toggle_off')
 			else
 				globals.sound = true
 				gui.play_flipbook(sound_chk, 'toggle_on')
+			end
+
+		elseif( gui.pick_node(music_txt,action.x,action.y) or gui.pick_node(music_chk,action.x,action.y) ) then
+			if( globals.bg_music ) then
+				globals.bg_music = false
+				gui.play_flipbook(music_chk, 'toggle_off')
+			else
+				globals.bg_music = true
+				gui.play_flipbook(music_chk, 'toggle_on')
 			end
 
 -- 		elseif( gui.pick_node(bt_logo,action.x,action.y) ) then

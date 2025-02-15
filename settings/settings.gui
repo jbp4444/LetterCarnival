@@ -156,7 +156,7 @@ nodes {
 }
 nodes {
   position {
-    x: 200.0
+    x: 225.0
     y: 350.0
   }
   size {
@@ -181,6 +181,36 @@ nodes {
   type: TYPE_BOX
   texture: "stall_atlas/toggle_on"
   id: "sound_chk"
+  inherit_alpha: true
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 185.0
+    y: 250.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "BG Music"
+  font: "medfont"
+  id: "music"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 350.0
+    y: 250.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
+  }
+  type: TYPE_BOX
+  texture: "stall_atlas/toggle_on"
+  id: "music_chk"
   inherit_alpha: true
   size_mode: SIZE_MODE_AUTO
 }
